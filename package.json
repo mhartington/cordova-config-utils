@@ -1,0 +1,21 @@
+{
+  "name": "cordova-config-utils",
+  "version": "1.0.0",
+  "description": "Modify your config.xml after cordova prepare",
+  "scripts": {
+    "postinstall": "node scripts/install.js",
+    "postuninstall": "node scripts/uninstall.js"
+  },
+  "author": "Mike Hartington <mikehartington@gmail.com>",
+  "contributors": [
+    "Ross Martin",
+    "Josh Bavari",
+    "Diego Netto"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "elementtree": "^0.1.6",
+    "lodash": "^3.10.1",
+    "plist": "^1.1.0"
+  }
+}
