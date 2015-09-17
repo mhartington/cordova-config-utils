@@ -1,7 +1,11 @@
 {
   "name": "cordova-config-utils",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Modify your config.xml after cordova prepare",
+   "repository": {
+    "type": "git",
+    "url": "git://github.com/mhartington/cordova-config-utils.git"
+  },
   "scripts": {
     "postinstall": "node scripts/install.js",
     "postuninstall": "node scripts/uninstall.js"
