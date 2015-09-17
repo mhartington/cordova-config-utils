@@ -2,7 +2,7 @@
   "name": "cordova-config-utils",
   "version": "1.0.2",
   "description": "Modify your config.xml after cordova prepare",
-   "repository": {
+  "repository": {
     "type": "git",
     "url": "git://github.com/mhartington/cordova-config-utils.git"
   },
