@@ -1,6 +1,6 @@
 {
   "name": "cordova-config-utils",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Modify your config.xml after cordova prepare",
   "repository": {
     "type": "git",
@@ -17,6 +17,11 @@
     "Diego Netto"
   ],
   "license": "MIT",
+  "dependencies": {
+    "elementtree": "^0.1.6",
+    "lodash": "^3.10.1",
+    "plist": "^1.1.0"
+  },
   "peerDependencies": {
     "elementtree": "^0.1.6",
     "lodash": "^3.10.1",
