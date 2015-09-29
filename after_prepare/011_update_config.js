@@ -148,6 +148,10 @@ var platformConfig = (function() {
       var preferences = this.getPreferences(platform),
         type = 'preference';
 
+      if (!preferenceMappingData[platform]) {
+        return;
+      }
+
       _.each(preferences, function(preference) {
         var prefMappingData = preferenceMappingData[platform][preference.attrib.name],
           target,
