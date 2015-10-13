@@ -20,7 +20,8 @@
   "dependencies": {
     "elementtree": "^0.1.6",
     "lodash": "^3.10.1",
-    "plist": "^1.1.0"
+    "plist": "^1.1.0",
+    "xcode": "^0.8.2"
   },
   "peerDependencies": {
     "elementtree": "^0.1.6",

@@ -6,6 +6,7 @@ var path = require('path');
 var _ = require('lodash');
 var et = require('elementtree');
 var plist = require('plist');
+var xcode = require('xcode');
 
 var rootdir = path.resolve(__dirname, '../../');
 
@@ -205,6 +206,10 @@ var platformConfig = (function() {
           projectName = platformConfig.getConfigXml().findtext('name');
           targetFile = path.join(platformPath, projectName, projectName + '-Info.plist');
           platformConfig.updateIosPlist(targetFile, configItems);
+        } else if (platform === 'ios' && targetFileName === 'project.pbxproj') {
+          projectName = platformConfig.getConfigXml().findtext('name');
+          targetFile = path.join(platformPath, projectName + '.xcodeproj', 'project.pbxproj');
+          platformConfig.updateIosXcodeproj(targetFile, configItems);
         } else if (platform === 'android' && targetFileName === 'AndroidManifest.xml') {
           targetFile = path.join(platformPath, targetFileName);
           platformConfig.updateAndroidManifest(targetFile, configItems);
@@ -276,6 +281,22 @@ var platformConfig = (function() {
       tempInfoPlist = plist.build(infoPlist);
       tempInfoPlist = tempInfoPlist.replace(/<string>[\s\r\n]*<\/string>/g, '<string></string>');
       fs.writeFileSync(targetFile, tempInfoPlist, 'utf-8');
+    },
+
+    /* Updates the *.xcodeproj/project.pbxproj file with data from config.xml using the npm 'xcode' module. */
+    updateIosXcodeproj: function(targetFile, configItems) {
+      var xcodeProject = xcode.project(targetFile);
+      xcodeProject.parse(function(err) {
+        if (err) {
+          throw new Error('Failed to parse ' + targetFile + ': ' + err);
+        }
+        _.each(configItems, function(item) {
+          if (item.data.attrib && item.data.attrib.name && item.data.attrib.value) {
+            xcodeProject.addBuildProperty(item.data.attrib.name, item.data.attrib.value);
+          }
+        });
+        fs.writeFileSync(targetFile, xcodeProject.writeSync(), 'utf-8');
+		});
     }
   };
 })();

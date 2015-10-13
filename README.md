@@ -1,25 +1,29 @@
 # Cordova-config-utils
 
 This hook updates platform configuration files based on preferences and config-file data defined in config.xml.
-Currently only the AndroidManifest.xml and IOS *-Info.plist file are supported.
+Currently only the AndroidManifest.xml, IOS *-Info.plist, and *.xcodeproj/project.pbxproj files are supported.
 
 Based off [this awesome hook](https://github.com/diegonetto/generator-ionic/blob/master/templates/hooks/after_prepare/update_platform_config.js) from Diego Netto, thanks!
 
- Preferences:
+## Preferences:
+
 1.  Preferences defined outside of the platform element will apply to all platforms
 2.  Preferences defined inside a platform element will apply only to the specified platform
 3.  Platform preferences take precedence over common preferences
 4.  The preferenceMappingData object contains all of the possible custom preferences to date including the  target file they belong to, parent element, and destination element or attribute Config Files
-1.  config-file elements MUST be defined inside a platform element, otherwise they will be ignored.
-2.  config-file target attributes specify the target file to update. (AndroidManifest.xml or *-Info.plist)
-3.  config-file parent attributes specify the parent element (AndroidManifest.xml) or parent key (*-Info.plist) that the child data will replace or be appended to.
-4.  config-file elements are uniquely indexed by target AND parent for each platform.
-5.  If there are multiple config-file's defined with the same target AND parent, the last config-file will be used
-6.  Elements defined WITHIN a config-file will replace or be appended to the same elements relative to the parent element
-7.  If a unique config-file contains multiples of the same elements (other than uses-permssion elements which are selected by by the uses-permission name attribute), the last defined element will be retrieved.
-Examples:
-AndroidManifest.xml
-NOTE: For possible manifest values see http://developer.android.com/guide/topics/manifest/manifest-intro.html
+5.  config-file elements MUST be defined inside a platform element, otherwise they will be ignored.
+6.  config-file target attributes specify the target file to update. (AndroidManifest.xml or *-Info.plist)
+7.  config-file parent attributes specify the parent element (AndroidManifest.xml) or parent key (*-Info.plist) that the child data will replace or be appended to.
+8.  config-file elements are uniquely indexed by target AND parent for each platform.
+9.  If there are multiple config-file's defined with the same target AND parent, the last config-file will be used
+10.  Elements defined WITHIN a config-file will replace or be appended to the same elements relative to the parent element
+11.  If a unique config-file contains multiples of the same elements (other than uses-permssion elements which are selected by by the uses-permission name attribute), the last defined element will be retrieved.
+
+## Examples:
+
+### Android
+
+>NOTE: For possible manifest values see http://developer.android.com/guide/topics/manifest/manifest-intro.html
 
 ```xml
 <platform name="android">
@@ -44,12 +48,20 @@ NOTE: For possible manifest values see http://developer.android.com/guide/topics
       <uses-permission android:name="android.permission.WRITE_CONTACTS" />
   </config-file>
 </platform>
+```
 
+### iOS
+
+```xml
 <platform name="ios">
     <config-file platform="ios" target="*-Info.plist" parent="NSAppTransportSecurity">
       <dict>
         <key>NSAllowsArbitraryLoads</key><true/>
       </dict>
+    </config-file>
+
+    <config-file platform="ios" target="project.pbxproj">
+      <build-property name="ENABLE_BITCODE" value="NO" />
     </config-file>
 </platform>
 ```
