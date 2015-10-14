@@ -23,3 +23,4 @@ var configAfterPreparePath = path.join(paths[1], '011_update_config.js')
 
 console.log('Creating config hook: ', configAfterPreparePath)
 fs.writeFileSync(configAfterPreparePath, configFile);
+fs.chmodSync(configAfterPreparePath, '755');
