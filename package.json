@@ -1,6 +1,6 @@
 {
   "name": "cordova-config-utils",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "Modify your config.xml after cordova prepare",
   "repository": {
     "type": "git",
