@@ -6,8 +6,10 @@ var fs = require('fs')
 var path = require('path')
 var cwd = process.cwd() //proj directory
 var scriptPath = __dirname //node_modules/cordova-uglify/scripts
+var pjson = require(path.join(cwd, '../../package.json'));
 
-var paths = [ path.join(cwd, '../../hooks'), path.join(cwd, '../../hooks/after_prepare') ];
+var cordovaHome = pjson.cordovaHome ? '../../' + pjson.cordovaHome : '../..';
+var paths = [ path.join(cwd, cordovaHome, 'hooks'), path.join(cwd, cordovaHome, 'hooks/after_prepare') ];
 
 for(var pathIndex in paths) {
   if(!fs.existsSync(paths[pathIndex])) {
