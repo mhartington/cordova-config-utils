@@ -292,7 +292,7 @@ var platformConfig = (function() {
       var xcodeProject = xcode.project(targetFile);
       xcodeProject.parse(function(err) {
         if (err) {
-          throw new Error('Failed to parse ' + targetFile + ': ' + err);
+          throw new Error('Failed to parse ' + targetFile + ': ' + JSON.stringify(err));
         }
         _.each(configItems, function(item) {
           if (item.data.attrib && item.data.attrib.name && item.data.attrib.value) {
