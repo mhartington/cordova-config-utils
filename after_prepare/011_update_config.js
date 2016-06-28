@@ -309,9 +309,7 @@ var platformConfig = (function() {
 (function() {
   if (rootdir) {
     // go through each of the platform directories that have been prepared
-    var platforms = _.filter(fs.readdirSync('platforms'), function(file) {
-      return fs.statSync(path.resolve('platforms', file)).isDirectory();
-    });
+    var platforms = (process.env.CORDOVA_PLATFORMS ? process.env.CORDOVA_PLATFORMS.split(',') : []);
 
     _.each(platforms, function(platform) {
       try {
