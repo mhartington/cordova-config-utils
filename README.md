@@ -1,3 +1,5 @@
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+
 # cordova-config-utils
 
 This hook can update platform configuration files based on preferences and config-file data defined in your normal config.xml, that are normally not used/ignored by Cordova. Use-cases include e.g. on iOS setting `ENABLE_BITCODE = NO` or disabling Application Transport Security (ATS). Currently only the `AndroidManifest.xml`, iOS `*-Info.plist` and `*.xcodeproj/project.pbxproj` files are supported.
